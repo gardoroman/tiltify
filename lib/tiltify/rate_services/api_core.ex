@@ -1,10 +1,14 @@
 defmodule TiltifyWeb.RateServices.ApiCore do
 
+    #-------------------------------------------------------------------------
+    # The free tier for fixer.io only allows "EUR" as a base pair.
+    # Ensure the passed in base pair is "EUR" otherwise return error tuple.
+    #-------------------------------------------------------------------------
     def ensure_only_eur(base) do
         formatted_base = String.upcase(base) |> String.trim()
         if formatted_base == "EUR" do
-            {:ok, base}
-        else 
+            {:ok, formatted_base}
+        else
             {:error, %{view: "unsupported.html", base: base}}
         end
       end

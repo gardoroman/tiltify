@@ -10,9 +10,8 @@ defmodule TiltifyWeb.ErrorView do
   end
 
   def render("unsupported.html", %{info: base}) do
-    "<h1>Base #{base} not supported</h1>" <>
-    "<p>The service only supports EUR at the moment.</p>" <>
-    "<p>STATUS CODE 422</p>"
+    "Base #{base} not supported" <>
+    "The service only supports EUR at the moment." 
   end  
 
 end

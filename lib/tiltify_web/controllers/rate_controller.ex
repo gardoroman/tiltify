@@ -9,8 +9,8 @@ defmodule TiltifyWeb.RateController do
 
   def show(conn, %{"base" => base, "amount" => amount, "target" => target}) do
     with(
-      {:ok, _} = ApiCore.ensure_only_eur(base),
-      {:ok, response} = ApiCore.make_api_call("EUR", amount, target)
+      {:ok, _} <- ApiCore.ensure_only_eur(base),
+      {:ok, response} <- ApiCore.make_api_call("EUR", amount, target)
     ) do
       render(conn, "rate.html", rate: response)
     else
