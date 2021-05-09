@@ -35,6 +35,7 @@ defmodule Tiltify.MixProject do
     [
       {:phoenix, "~> 1.5.8"},
       {:phoenix_ecto, "~> 4.1"},
+      {:decimal, "~> 2.0"},
       {:ecto_sql, "~> 3.4"},
       {:httpoison, "~> 1.8"},
       {:postgrex, ">= 0.0.0"},

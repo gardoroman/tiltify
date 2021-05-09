@@ -7,7 +7,7 @@ defmodule TiltifyWeb.RateServices.ApiCore do
     def ensure_only_eur(base) do
         formatted_base = String.upcase(base) |> String.trim()
         if formatted_base == "EUR" do
-            {:ok, formatted_base}
+            {:ok, "EUR"}
         else
             {:error, %{view: "unsupported.html", base: base}}
         end
@@ -24,9 +24,27 @@ defmodule TiltifyWeb.RateServices.ApiCore do
         "http://data.fixer.io/api/#{date}?access_key=#{api_key}&base=#{base}&symbols=#{target}"
         |> HTTPoison.get()
         |> parse_api_call()
+        |> get_rate(target, amount)
     end
 
     def parse_api_call({:ok, %HTTPoison.Response{body: body}}) do
         {:ok, decoded_body} = Jason.decode(body)
+        if decoded_body["success"] do
+            decoded_body["rates"]
+        end
     end
+    # def parse_api_call({:error, _}) do
+    #     # todo handle error
+    # end
+
+    def get_rate(rates, target, amount) do
+        rate = rates[target] |> to_string()
+        conversion = 
+            Decimal.mult(amount, rate) 
+            |> Decimal.round(2)
+            |> Decimal.to_string
+        response = conversion <> " " <> target
+        {:ok, response}
+    end
+    
 end
