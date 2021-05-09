@@ -3,18 +3,17 @@
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Install Node.js dependencies with `npm install` inside the `assets` directory
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](https://hexdocs.pm/phoenix/deployment.html).
+## Setting up the Service
 
-## Learn more
+  * This app requires an API key from fixer.io
+  * Create an environment variable named CURRENCY_API_KEY and set it with the API key obtained from fixer.io
 
-  * Official website: https://www.phoenixframework.org/
-  * Guides: https://hexdocs.pm/phoenix/overview.html
-  * Docs: https://hexdocs.pm/phoenix
-  * Forum: https://elixirforum.com/c/phoenix-forum
-  * Source: https://github.com/phoenixframework/phoenix
+## Notes on the App
+  * to use service navigate to `rates/EUR/amount/target`
+  * EUR is required as the base because it is the only based supported on the free tier
+  * amount is valid currency amount
+  * target is any of the symbols supported by the fixer.io service
