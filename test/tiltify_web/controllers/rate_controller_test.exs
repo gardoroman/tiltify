@@ -1,4 +1,4 @@
-defmodule TiltifyWeb.PageControllerTest do
+defmodule TiltifyWeb.RateControllerTest do
   use TiltifyWeb.ConnCase
 
   test "GET /", %{conn: conn} do

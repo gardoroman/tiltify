@@ -16,7 +16,8 @@ defmodule TiltifyWeb.Router do
   scope "/", TiltifyWeb do
     pipe_through :browser
 
-    get "/", PageController, :index
+    get "/", RateController, :index
+    get "/rates/:base/:amount/:target", RateController, :show
   end
 
   # Other scopes may use custom stacks.
