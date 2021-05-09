@@ -5,13 +5,17 @@ defmodule TiltifyWeb.ErrorView do
     "Page not found"
   end
 
-  def render("error.html", %{error: message}) do
-    %{error: message}
+  def render("error.html", %{info: message}) do
+    message
   end
 
   def render("unsupported.html", %{info: base}) do
     "Base #{base} not supported" <>
     "The service only supports EUR at the moment." 
+  end
+
+  def render("unknown.html", %{info: target}) do
+    "Target: #{target} is unknown" 
   end  
 
 end

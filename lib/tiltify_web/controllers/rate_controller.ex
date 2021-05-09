@@ -9,13 +9,15 @@ defmodule TiltifyWeb.RateController do
 
   def show(conn, %{"base" => base, "amount" => amount, "target" => target}) do
     with(
-      {:ok, _} <- ApiCore.ensure_only_eur(base),
+      {:ok, _} <- ApiCore.validate_base_currency(base),
+      {:ok, target} <- ApiCore.validate_target_currency(target),
+      {:ok, amount} <- ApiCore.validate_amount(amount),
       {:ok, response} <- ApiCore.make_api_call("EUR", amount, target)
     ) do
       render(conn, "rate.html", rate: response)
     else
-      {:error, %{view: "unsupported.html", base: base}} -> render_error_message(conn, :unprocessable_entity, "unsupported.html", base)
-      {:error, error_info} -> render_error_message(conn, :unprocessable_entity, "error.html", error_info)
+      {:error, %{view: view, base: base}} -> render_error_message(conn, :unprocessable_entity, view, base)
+      {:error, info} -> render_error_message(conn, :unprocessable_entity, "error.html", info)
     end
   end
 
